@@ -142,3 +142,15 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 4. Possible step: popup -> Local Storage -> messages -> a listener in Content Scripts like `chrome.runtime.onMessage.addListener` -> Changed current JS file -> Changed HTML
 
 
+## Publishing an extension to the Chrome Web Store
+- Chrome developer documentation for publishing: https://developer.chrome.com/docs/webstore/register/
+- Chrome Web Store dev console: https://chrome.google.com/webstore/devconsole/
+
+### Steps
+- Register and pay registration fee
+- In the chrome developer dashboard, zip "dist" folder in the react app.
+- Upload it into the store with "New Item"
+- Edit submission details
+- Edit Privacy Practices. As it requires you to justify certain permissions that you are requesting.
+- Then press "Submit for review". Normally will take a few working days for them to get back to us
+- Can use preview to view the chrome extension
