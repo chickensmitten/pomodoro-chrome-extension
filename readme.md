@@ -29,6 +29,8 @@
 ### Alert with Alarm
 - Need to get "alarms" permission in chrome.alarms
 - Setting the badge in chrome extension. this will change the badge in the chrome extension
+- Can change badge text.
+- Can use `chrome.alarm` to change badge periodically
 ```
 chrome.action.setBadgeText({text: `${time + 1}`})
 ```
@@ -58,7 +60,8 @@ chrome.search.query({
   text: `imdb ${event.selectionText}`,
 })
 ```
-- `chrome.tabs` opening new tabs with specific actions
+- `chrome.tabs` returns an array of tabs in the current browser. 
+- it has also other functions like getting the current active tab with `tab[0].id` or opening new tabs with specific actions
 ```
 chrome.tabs.create({
   url: `https://someURL.com/${event.selectionText}`,
@@ -133,6 +136,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 ```
 
 ## Workflow Summary
-- HTML -> JS file (popup.js, background.js) -> content scripts -> messages -> data fetching -> messages -> content scripts -> Changed JS file (popup.js, background.js) -> Changed HTML
+1. Make changes to popup.js or options.js -> store data in local storage
+2. Possible step: Then changes are reflected in the current HTML page. Workflow is as follows: Local Storage -> Content scripts -> Changed current JS file -> Changed HTML
+3. Possible step: popup -> Local Storage -> a listener in Content Scripts -> messages -> API data fetching -> messages -> content scripts -> Changed current JS file -> Changed HTML
+4. Possible step: popup -> Local Storage -> messages -> a listener in Content Scripts like `chrome.runtime.onMessage.addListener` -> Changed current JS file -> Changed HTML
 
 
